@@ -1,110 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>weather</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="shortcut icon"
-      href="./assets/imagess/favicon.png"
-      type="image/x-icon"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <style>
-      body {
-        background-image: url(./assets/imagess/bg-img.jpeg);
-        background-attachment: fixed;
-        background-size: cover;
-        background-repeat: no-repeat;
-        overflow: hidden;
-      }
-      .card {
-        backdrop-filter: blur(12px) saturate(99%);
-        -webkit-backdrop-filter: blur(12px) saturate(99%);
-        background-color: rgba(88, 102, 102, 0.1);
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.125);
-      }
-      .scrollbar::-webkit-scrollbar {
-        width: 5px;
-      }
-      .scrollbar::-webkit-scrollbar-thumb {
-        background-color: #7c7f80b1;
-        border-radius: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="h-screen w-screen flex flex-col">
-      <div class="h-14 flex justify-center items-center">
-        <h1
-          class="animate__animated animate__fadeInDown text-2xl md:text-4xl text-orange-100 font-bold tracking-wider"
-        >
-          Weather Forecast
-        </h1>
-      </div>
-      <div class="h-28 w-full flex justify-center mt-2 items-center">
-        <div>
-          <div class="flex gap-2 md:gap-5">
-            <input
-              type="text"
-              id="location"
-              class="animate__animated animate__fadeInLeft h-12 md:w-72 rounded-md bg-[#191b205b] shadow-lg shadow-zinc-800 text-center outline-none px-3 text-white md:text-xl font-bold"
-              placeholder="Enter City/Country Name"
-            />
 
-            <button
-              id="btn"
-              class="animate__animated animate__fadeInRight h-12 w-16 md:w-24 rounded-md bg-[#191b205b] shadow-lg shadow-zinc-800 text-neutral-300 font-bold"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="p-3 w-full mt-2 flex-col md:flex-row flex justify-center gap-8"
-      >
-        <div
-          class="animate__animated animate__fadeInLeft h-48 md:w-80 border-2 rounded-md card"
-        >
-          <h1 class="text-orange-100 text-2xl font-semibold text-center">
-            Today's Weather
-          </h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weather</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon" />
 
-          <hr />
-          <p id="today_weather" class="text-white text-xl p-2"></p>
-        </div>
+  <style>
+    body {
+      background-image: url(./assets/images/bg-img.jpeg);
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      /* overflow: hidden; */
+    }
 
-        <div
-          class="animate__animated animate__fadeInRight h-48 md:w-80 border-2 rounded-md card"
-        >
-          <h1 class="text-orange-100 text-2xl font-semibold text-center">
-            Tomorrow's Weather
-          </h1>
-          <hr />
-          <p id="tomorrow_weather" class="text-white text-xl p-2"></p>
-        </div>
-      </div>
-      <div class="p-2 flex justify-center mt-2">
-        <div
-          class="animate__animated animate__fadeInUp h-48 w-96 mt-3 border-2 rounded card"
-        >
-          <h1 class="text-orange-100 text-2xl font-semibold text-center">
-            Next 7 Days Weather
-          </h1>
-          <hr />
-          <p
-            id="seven_day_weather"
-            class="scrollbar text-white text-xl p-2 h-[155px] overflow-auto"
-          ></p>
+    .card {
+      backdrop-filter: blur(12px) saturate(99%);
+      -webkit-backdrop-filter: blur(12px) saturate(99%);
+      background-color: rgba(88, 102, 102, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+
+    .scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+      background-color: #7c7f80b1;
+      border-radius: 10px;
+    }
+
+    .animate_up {
+      animation: animate_up 1s ease-in-out;
+      transition: 1s;
+    }
+
+    @keyframes animate_up {
+      0% {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+    .animate_right {
+      animation: animate_right 1s ease-in-out;
+      transition: 1s;
+    }
+
+    @keyframes animate_right {
+      0% {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+
+    .animate_left {
+      animation: animate_left 1s ease-in-out;
+      transition: 1s;
+    }
+
+    @keyframes animate_left {
+      0% {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+
+    }
+
+    .animate_down {
+      animation: animate_down 1s ease-in-out;
+      transition: 1s;
+    }
+
+    @keyframes animate_down {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="h-screen w-screen flex flex-col overflow-hidden">
+    <div class="h-14 flex justify-center items-center">
+      <h1 class="animate_up text-2xl md:text-4xl text-orange-100 font-bold tracking-wider">
+        Weather Forecast
+      </h1>
+    </div>
+    <div class="h-28 w-full flex justify-center mt-2 items-center">
+      <div>
+        <div class="flex gap-2 md:gap-5">
+          <input type="text" id="location"
+            class="animate_left h-12 md:w-72 rounded-md bg-[#191b205b] shadow-lg shadow-zinc-800 text-center outline-none px-3 text-white md:text-xl font-bold"
+            placeholder="Enter City/Country Name" />
+
+          <button id="btn"
+            class="animate_right h-12 w-16 md:w-24 rounded-md bg-[#191b205b] shadow-lg shadow-zinc-800 text-neutral-300 font-bold">
+            Search
+          </button>
         </div>
       </div>
     </div>
-    <script src="./script/api.js"></script>
-  </body>
+    <div class="p-3 w-full mt-2 flex-col md:flex-row flex justify-center gap-8">
+      <div class="animate_left h-48 md:w-80 border-2 rounded-md card">
+        <h1 class="text-orange-100 text-2xl font-semibold text-center">
+          Today's Weather
+        </h1>
+
+        <hr />
+        <p id="today_weather" class="text-white text-xl p-2"></p>
+      </div>
+
+      <div class="animate_right h-48 md:w-80 border-2 rounded-md card">
+        <h1 class="text-orange-100 text-2xl font-semibold text-center">
+          Tomorrow's Weather
+        </h1>
+        <hr />
+        <p id="tomorrow_weather" class="text-white text-xl p-2"></p>
+      </div>
+    </div>
+    <div class="p-2 flex justify-center mt-2">
+      <div class="animate_down h-48 w-96 mt-3 border-2 rounded card">
+        <h1 class="text-orange-100 text-2xl font-semibold text-center">
+          Next 7 Days Weather
+        </h1>
+        <hr />
+        <p id="seven_day_weather" class="scrollbar text-white text-xl p-2 h-[155px] overflow-auto"></p>
+      </div>
+    </div>
+  </div>
+  <script src="./script/api.js"></script>
+</body>
+
 </html>
